@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리 가족 사이트</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 로그인/회원가입 화면 -->
+        <div id="auth-container" class="container">
+            <div class="auth-box">
+                <h1>🏠 우리 가족 사이트</h1>
+                
+                <div id="login-form" class="form-container">
+                    <h2>로그인</h2>
+                    <form id="loginForm">
+                        <input type="email" id="loginEmail" placeholder="이메일" required>
+                        <input type="password" id="loginPassword" placeholder="비밀번호" required>
+                        <button type="submit">로그인</button>
+                    </form>
+                    <p>계정이 없으신가요? <a href="#" id="showRegister">회원가입</a></p>
+                </div>
+
+                <div id="register-form" class="form-container hidden">
+                    <h2>회원가입</h2>
+                    <form id="registerForm">
+                        <input type="text" id="registerUsername" placeholder="사용자명" required>
+                        <input type="email" id="registerEmail" placeholder="이메일" required>
+                        <input type="password" id="registerPassword" placeholder="비밀번호" required>
+                        <input type="text" id="familyCode" placeholder="가족 코드" required>
+                        <button type="submit">회원가입</button>
+                    </form>
+                    <p>이미 계정이 있으신가요? <a href="#" id="showLogin">로그인</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 메인 화면 -->
+        <div id="main-container" class="container hidden">
+            <header>
+                <h1>🏠 우리 가족</h1>
+                <div class="user-info">
+                    <span id="welcomeMessage"></span>
+                    <button id="logoutBtn">로그아웃</button>
+                </div>
+            </header>
+
+            <nav class="main-nav">
+                <button class="nav-btn active" data-section="chat">💬 채팅</button>
+                <button class="nav-btn" data-section="games">🎮 게임</button>
+                <button class="nav-btn" data-section="photos">📷 사진</button>
+                <button class="nav-btn" data-section="calendar">📅 일정</button>
+            </nav>
+
+            <!-- 채팅 섹션 -->
+            <div id="chat-section" class="section active">
+                <div class="chat-rooms">
+                    <h3>채팅방</h3>
+                    <div class="room-list">
+                        <button class="room-btn active" data-room="family">👨‍👩‍👧‍👦 가족 채팅</button>
+                        <button class="room-btn" data-room="parents">👫 부모님</button>
+                        <button class="room-btn" data-room="kids">👶 아이들</button>
+                    </div>
+                </div>
+                
+                <div class="chat-container">
+                    <div id="chatMessages" class="chat-messages"></div>
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="메시지를 입력하세요...">
+                        <button id="sendBtn">전송</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 게임 섹션 -->
+            <div id="games-section" class="section">
+                <h2>🎮 가족 게임</h2>
+                <div class="games-grid">
+                    <div class="game-card" data-game="quiz">
+                        <h3>🧠 가족 퀴즈</h3>
+                        <p>가족에 대한 재미있는 퀴즈를 풀어보세요!</p>
+                        <button class="play-btn">게임 시작</button>
+                    </div>
+                    <div class="game-card" data-game="memory">
+                        <h3>🃏 기억력 게임</h3>
+                        <p>카드를 뒤집어서 같은 그림을 찾아보세요!</p>
+                        <button class="play-btn">게임 시작</button>
+                    </div>
+                    <div class="game-card" data-game="drawing">
+                        <h3>🎨 그림 맞추기</h3>
+                        <p>그림을 그리고 다른 가족이 맞춰보세요!</p>
+                        <button class="play-btn">게임 시작</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 사진 섹션 -->
+            <div id="photos-section" class="section">
+                <h2>📷 가족 사진</h2>
+                <div class="photo-upload">
+                    <input type="file" id="photoInput" accept="image/*" multiple>
+                    <button id="uploadBtn">사진 업로드</button>
+                </div>
+                <div id="photoGallery" class="photo-gallery">
+                    <!-- 사진들이 여기에 표시됩니다 -->
+                </div>
+            </div>
+
+            <!-- 일정 섹션 -->
+            <div id="calendar-section" class="section">
+                <h2>📅 가족 일정</h2>
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button id="prevMonth">&lt;</button>
+                        <h3 id="currentMonth"></h3>
+                        <button id="nextMonth">&gt;</button>
+                    </div>
+                    <div id="calendar" class="calendar-grid">
+                        <!-- 달력이 여기에 생성됩니다 -->
+                    </div>
+                </div>
+                <div class="event-form">
+                    <h3>새 일정 추가</h3>
+                    <input type="text" id="eventTitle" placeholder="일정 제목">
+                    <input type="date" id="eventDate">
+                    <button id="addEventBtn">일정 추가</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 게임 모달 -->
+        <div id="gameModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="gameContent">
+                    <!-- 게임 내용이 여기에 로드됩니다 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
