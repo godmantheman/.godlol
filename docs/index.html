@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리 가족 사이트 - 데모</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .demo-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .main-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: #667eea;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .features {
+            padding: 40px 20px;
+        }
+
+        .features h2 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .demo-section {
+            background: #f8f9fa;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .demo-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .demo-chat {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .chat-header {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            background: #e3f2fd;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .message.own {
+            background: #667eea;
+            color: white;
+            text-align: right;
+        }
+
+        .username {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .deployment-info {
+            background: white;
+            padding: 40px 20px;
+        }
+
+        .deployment-info h2 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        .deployment-steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .step h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #5a6fd8;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="demo-notice">
+            <strong>📢 데모 버전</strong> - 이것은 GitHub Pages용 정적 데모입니다. 
+            실제 기능을 사용하려면 Node.js 서버가 필요합니다.
+        </div>
+
+        <div class="main-container">
+            <header>
+                <h1>🏠 우리 가족 사이트</h1>
+                <p>가족을 위한 종합 소통 플랫폼</p>
+            </header>
+
+            <div class="features">
+                <h2>✨ 주요 기능</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon">🔐</div>
+                        <h3>안전한 로그인</h3>
+                        <p>JWT 토큰 기반의 안전한 인증 시스템으로 가족만의 프라이빗한 공간을 제공합니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💬</div>
+                        <h3>실시간 채팅</h3>
+                        <p>Socket.IO를 이용한 실시간 채팅으로 가족 구성원들과 언제든지 소통할 수 있습니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🎮</div>
+                        <h3>가족 게임</h3>
+                        <p>퀴즈, 기억력 게임, 그림 맞추기 등 가족이 함께 즐길 수 있는 다양한 게임을 제공합니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📷</div>
+                        <h3>사진 공유</h3>
+                        <p>소중한 가족 사진들을 안전하게 저장하고 공유할 수 있는 갤러리 기능입니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📅</div>
+                        <h3>일정 관리</h3>
+                        <p>가족의 중요한 일정과 이벤트를 함께 관리하고 공유할 수 있습니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📱</div>
+                        <h3>반응형 디자인</h3>
+                        <p>모바일, 태블릿, 데스크톱 모든 기기에서 최적화된 사용자 경험을 제공합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h2>💬 채팅 미리보기</h2>
+                <div class="demo-chat">
+                    <div class="chat-header">
+                        <strong>👨‍👩‍👧‍👦 가족 채팅방</strong>
+                    </div>
+                    <div class="message">
+                        <div class="username">엄마 👩</div>
+                        <div>오늘 저녁에 뭐 먹을까요?</div>
+                    </div>
+                    <div class="message own">
+                        <div class="username">아빠 👨</div>
+                        <div>치킨 어때요? 아이들이 좋아할 것 같은데</div>
+                    </div>
+                    <div class="message">
+                        <div class="username">딸 👧</div>
+                        <div>와! 치킨 좋아요! 🍗</div>
+                    </div>
+                    <div class="message">
+                        <div class="username">아들 👦</div>
+                        <div>저도 치킨 찬성이에요!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deployment-info">
+                <h2>🚀 배포 방법</h2>
+                <div class="deployment-steps">
+                    <div class="step">
+                        <h3>1. GitHub 저장소 생성</h3>
+                        <p>GitHub에서 새 저장소를 생성하고 코드를 업로드하세요.</p>
+                        <div class="code">
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/username/family-site.git
+git push -u origin main</div>
+                    </div>
+
+                    <div class="step">
+                        <h3>2. Vercel 배포 (추천)</h3>
+                        <p>Vercel은 Node.js 앱을 쉽게 배포할 수 있는 플랫폼입니다.</p>
+                        <ul style="text-align: left; margin: 10px 0;">
+                            <li>1. <a href="https://vercel.com" target="_blank">vercel.com</a>에서 GitHub 계정으로 로그인</li>
+                            <li>2. "New Project" 클릭</li>
+                            <li>3. GitHub 저장소 선택</li>
+                            <li>4. 환경 변수 설정 (MONGODB_URI, JWT_SECRET)</li>
+                            <li>5. Deploy 클릭</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h3>3. Railway 배포</h3>
+                        <p>Railway도 Node.js 앱 배포에 좋은 선택입니다.</p>
+                        <ul style="text-align: left; margin: 10px 0;">
+                            <li>1. <a href="https://railway.app" target="_blank">railway.app</a>에서 GitHub 계정으로 로그인</li>
+                            <li>2. "New Project" → "Deploy from GitHub repo"</li>
+                            <li>3. 저장소 선택 후 환경 변수 설정</li>
+                            <li>4. 자동 배포 완료</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h3>4. 환경 변수 설정</h3>
+                        <p>배포 시 다음 환경 변수들을 설정해야 합니다:</p>
+                        <div class="code">
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_super_secret_key
+PORT=3000</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="https://vercel.com" class="btn" target="_blank">Vercel로 배포하기</a>
+                    <a href="https://railway.app" class="btn" target="_blank">Railway로 배포하기</a>
+                    <a href="https://github.com" class="btn" target="_blank">GitHub 저장소 만들기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 우리 가족 사이트. 가족과 함께하는 즐거운 시간! 🏠❤️</p>
+    </footer>
+
+    <script>
+        // 간단한 인터랙션 추가
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    card.style.transform = 'translateY(-5px)';
+                }, 200);
+            });
+        });
+
+        // 데모 메시지 애니메이션
+        const messages = document.querySelectorAll('.message');
+        messages.forEach((message, index) => {
+            message.style.opacity = '0';
+            message.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                message.style.transition = 'all 0.5s ease';
+                message.style.opacity = '1';
+                message.style.transform = 'translateY(0)';
+            }, index * 500 + 1000);
+        });
+    </script>
+</body>
+</html>
